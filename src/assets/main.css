@@ -1,0 +1,11 @@
+@import './base.css';
+
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.debug-text {
+  color: lightblue
+}
