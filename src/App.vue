@@ -6,7 +6,9 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
       <nav class="centeredItem">
         <RouterLink to="/"> Home </RouterLink>
+        <RouterLink to="/form"> form </RouterLink>
         <RouterLink to="/calendar"> Calendrier </RouterLink>
+        <routerLink to="/watcher"> Watcher </routerLink>
       </nav>
   </header>
 
