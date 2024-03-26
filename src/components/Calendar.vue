@@ -80,46 +80,57 @@ window.addEventListener("keydown", (e)=>{
 </script>
 
 <template>
+  <main>
     <table>
-        <thead>
-            <tr class="title">
-                <th colspan="2"><h2>calendrier {{ moment().month(Month).format("Y") }}</h2></th>
-            </tr>
-        <tr class="title">
-          <th >
-            <button @click="changeMonth('--')"><</button> {{ moment().month(Month).format("MMMM YYYY") }} <button @click="changeMonth('++')">></button>
-          </th>
-        </tr>
+      <thead>
+      <tr class="title">
+        <th colspan="2"><h2>calendrier {{ moment().month(Month).format("Y") }}</h2></th>
+      </tr>
+      <tr class="title">
+        <th >
+          <button @click="changeMonth('--')"><</button> {{ moment().month(Month).format("MMMM YYYY") }} <button @click="changeMonth('++')">></button>
+        </th>
+      </tr>
 
-        </thead>
-        <tbody class="body">
-        <tr class="subtitle">
-          <th>Lundi</th>
-          <th>Mardi</th>
-          <th>Mercredi</th>
-          <th>Jeudi</th>
-          <th>Vendredi</th>
-          <th>Samedi</th>
-          <th>Dimanche</th>
-        </tr>
-        <tr class="content"
-            v-for=" day in Calendar ">
-          <th v-if="day === 1" :style="CalendarCss" >
-            {{ day }}
-          </th>
-          <th v-else >
-            {{ day }}
-            <div v-if="GetTodayEvent(moment().month(Month).format('Y'), rawMonth+1, day) !== undefined "> {{ GetTodayEvent(moment().month(Month).format('Y'), rawMonth+1, day) }} </div>
-          </th>
-        </tr>
-        </tbody>
+      </thead>
+      <tbody class="body">
+      <tr class="subtitle">
+        <th>Lundi</th>
+        <th>Mardi</th>
+        <th>Mercredi</th>
+        <th>Jeudi</th>
+        <th>Vendredi</th>
+        <th>Samedi</th>
+        <th>Dimanche</th>
+      </tr>
+      <tr class="content"
+          v-for=" day in Calendar ">
+        <th v-if="day === 1" :style="CalendarCss" >
+          {{ day }}
+        </th>
+        <th v-else >
+          {{ day }}
+          <div v-if="GetTodayEvent(moment().month(Month).format('Y'), rawMonth+1, day) !== undefined "> {{ GetTodayEvent(moment().month(Month).format('Y'), rawMonth+1, day) }} </div>
+        </th>
+      </tr>
+      </tbody>
     </table>
+  </main>
 </template>
 
 
 <style scoped>
 h2 {
   border: none !important;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 90vh;
+  width: 100vw;
 }
 table {
   margin: 20px auto !important;

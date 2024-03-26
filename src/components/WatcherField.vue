@@ -1,12 +1,11 @@
 <script setup>
-const props = defineProps(['visible'])
-
-
 import {ref, watch} from "vue";
-
+// game utils
 const question = ref('');
 const answer = ref('this is a answer to watch');
 const loading = ref(false);
+// prevent Game
+const isVisible = ref(false);
 
 /*
 * Watch regarde en permanence l'état d'une "ref" et permet de suivre l'évolution de celui-ci
@@ -27,32 +26,52 @@ watch(question, async (newValue, oldValue) => {
   }
 })
 
-/**
- * show component with a button (with watcher)
- */
 </script>
 
 <template>
-  <div @class="checkVisible === true ? 'visible' : 'invisible'">
-    <p>
-      Ask a yes/no question:
-      <input v-model="question" :disabled="loading" />
-    </p>
-    <p>{{ answer }}</p>
+
+  <div v-if="!isVisible">
+    <p> do you have a question for me ? </p>
+    <span><input type="button" @click="isVisible = true" value="yes"> or <input type="button" @click="$router.push('/')" value="no" ></span>
   </div>
+  <!-- render if "yes" button is clicked -->
+    <div v-if="isVisible">
+      <p>
+        Ask a yes/no question:
+        <input type="text" v-model="question" :disabled="loading" />
+      </p>
+      <p>{{ answer }}</p>
+    </div>
 
 </template>
 
 <style scoped>
-.visible{
-  visibility: visible;
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
 }
 
-.invisible{
-  visibility: hidden;
+input[type=button] {
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  padding: 5px;
+  width: 50px;
+  height: 2rem;
+  border-radius: 8px;
+
+
+}
+input[type=button]:hover {
+  cursor: pointer;
+  border-color: darkgray;
+  transition: all 0.5s;
+
 }
 
-input{
+input[type=text]{
   border: none;
   border-bottom: 1px solid #ccc;
   outline: none;
