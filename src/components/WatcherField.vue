@@ -66,7 +66,7 @@ input[type=button] {
 }
 input[type=button]:hover {
   cursor: pointer;
-  border-color: darkgray;
+  border-color: lightcoral;
   transition: all 0.5s;
 
 }

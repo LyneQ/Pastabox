@@ -1,20 +1,25 @@
 <script setup>
-
+import AlertButton from "@/components/Alert-button.vue";
 import {computed, onMounted, ref} from "vue";
 
-const username = defineModel({ default: 'invalid'});
+const input = ref(null);
+const username = defineModel({ default: 'Kyle C'});
 
-const inputData = computed({
+const inputDataValidity = computed({
   get: () => username.value.replaceAll(' ', ''),
   set: (value) => { username.value = value.toString() },
 })
 
-const input = ref(null);
 onMounted(()=>{
   // used to focus user attention on a specific element on load
   input.value.focus()
   console.log("[Info] Form View loaded successfully");
 })
+
+
+function eventExecutor(arg) {
+  alert(`Bonjour ${arg} !`)
+}
 </script>
 
 <template>
@@ -23,9 +28,11 @@ onMounted(()=>{
     <input type="text"
            placeholder="enter a username"
            ref="input"
-           :class=" inputData.length < 8 && inputData.length !== 0 ? 'invalid-input' : '' "
+           :class=" inputDataValidity.length < 8 ? 'invalid-input' : '' "
            v-model="username" />
-    <p :class="inputData.length < 8 && inputData.length !== 0 ? 'invalid-warning' : 'valid-warning' ">votre non d'utilisateur dois comporter au moins 8 caractère </p>
+    <div v-show="inputDataValidity.length >= 8 ">
+      <alert-button @alert="eventExecutor" :username="username" />
+    </div>
   </div>
 </template>
 
@@ -38,14 +45,36 @@ onMounted(()=>{
 
     margin-top: 1rem;
   }
-  .form-view input {
-    border: 1px solid #ccc;
-    background: none;
-    padding: 0.5rem;
-
+  input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ccc;
     outline: none;
+    background-color: transparent;
+  }
 
+  input[type=text]:focus {
+    border-color: lightcoral;
+  }
+
+  .disableInput {
+    cursor: not-allowed;
+    border-color: lightgray;
+  }
+
+  input[type=button]{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: none;
+    margin-top: 5px;
+    padding: 0.5rem;
+    outline: none;
     width: 150px;
+    transition: all 0.5s;
+  }
+  input[type="button"]:hover{
+    cursor: pointer;
+    border-color: lightcoral;
+    transition: all 0.5s;
   }
 
   .invalid-input {

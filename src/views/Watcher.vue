@@ -6,7 +6,6 @@ import WatcherField from "@/components/WatcherField.vue";
 
 <template>
   <div>
-
     <WatcherField/>
   </div>
 </template>
