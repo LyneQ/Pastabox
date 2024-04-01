@@ -17,9 +17,6 @@ onMounted(()=>{
 })
 
 
-function eventExecutor(arg) {
-  alert(`Bonjour ${arg} !`)
-}
 </script>
 
 <template>
@@ -30,9 +27,7 @@ function eventExecutor(arg) {
            ref="input"
            :class=" inputDataValidity.length < 8 ? 'invalid-input' : '' "
            v-model="username" />
-    <div v-show="inputDataValidity.length >= 8 ">
-      <alert-button @alert="eventExecutor" :username="username" />
-    </div>
+      <alert-button v-model="username" :usernameLength="inputDataValidity" :username="username" />
   </div>
 </template>
 
@@ -59,22 +54,6 @@ function eventExecutor(arg) {
   .disableInput {
     cursor: not-allowed;
     border-color: lightgray;
-  }
-
-  input[type=button]{
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background: none;
-    margin-top: 5px;
-    padding: 0.5rem;
-    outline: none;
-    width: 150px;
-    transition: all 0.5s;
-  }
-  input[type="button"]:hover{
-    cursor: pointer;
-    border-color: lightcoral;
-    transition: all 0.5s;
   }
 
   .invalid-input {
