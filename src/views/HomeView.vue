@@ -5,7 +5,7 @@
 <template>
   <main>
     <div class="card">
-      <img src="/pfp.png" alt="Avatar">
+      <img src="/pfp.gif" alt="Avatar">
       <div class="card-body">
         <h1>
           Bienvenue sur Pastabox
